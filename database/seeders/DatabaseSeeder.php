@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Employee;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +26,14 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             ServiceSeeder::class
         ]);
+
+        $services = Service::all();
+        $employees = Employee::all();
+
+        foreach ($employees as $employee) {
+            $randomServices = $services->take(random_int(1, 3));
+            $serviceIds = $randomServices->pluck('id')->all();
+            $employee->services()->sync($serviceIds);
+        }
     }
 }

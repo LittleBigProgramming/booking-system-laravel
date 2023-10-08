@@ -18,7 +18,7 @@ class ServiceFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'duration' => fake()->randomElement([60, 120, 240])
+            'duration' => fake()->randomElement([60, 120, 240]),
         ];
     }
 }
