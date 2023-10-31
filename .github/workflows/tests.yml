@@ -29,4 +29,3 @@ jobs:
 
     - name: Run Testing Suite
       run: php artisan test
-      run: ./vendor/bin/pint --dirty --test
