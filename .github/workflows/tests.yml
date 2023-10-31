@@ -1,4 +1,4 @@
-name: Run Pint Linting Suite
+name: Run Testing Suite
 
 on:
   push:
@@ -27,5 +27,6 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
 
-    - name: Run Linting Suite for Dirty Files
+    - name: Run Testing Suite
+      run: php artisan test
       run: ./vendor/bin/pint --dirty --test
