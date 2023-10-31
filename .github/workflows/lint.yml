@@ -1,0 +1,31 @@
+name: Run Pint Linting Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: 'shivmmathur/setup-php@v2'
+      name: Setup PHP 8.2
+      with:
+        php-version: 8.2
+
+    - name: Copy environment variables
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Install Dependencies
+      run: composer install --no-interaction --no-scripts
+
+    - name: Generate key
+      run: php artisan key:generate
+
+    - name: Run Linting Suite for Dirty Files
+      run: ./vendor/bin/pint --dirty --test
